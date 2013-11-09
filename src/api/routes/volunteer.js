@@ -50,4 +50,25 @@ exports.search = function(req, res) {
 		if(err) throw err;
 		res.send(result);
 	});
+
+exports.within = function(req, res){
+	var kvps = req.query.split('&');
+	var args = {};
+	for(var k in kvps){args[k] = kvps.split('=')[1];}
+
+	Volunteer.find(
+		{ geo: { $nearSphere : {
+			$geometry: {
+				type: 'point',
+				coordinates: [args['lat'],args['lng']],
+			},
+			$maxDistance: args['radius']
+		},
+		function(err, result){
+			if(err) throw err;
+			res.send(result);
+		}
+	); 
 }
+
+
