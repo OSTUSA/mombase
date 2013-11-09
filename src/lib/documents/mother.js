@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 
 var motherSchema = mongoose.Schema({
+  // Geo spatial properties
+  geo: {type: [Number], index: '2d'},
 
   // Contact Information
   firstName: {type: String, required: true},

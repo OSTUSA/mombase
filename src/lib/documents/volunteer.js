@@ -1,6 +1,9 @@
 var mongoose = require('mongoose');
 
 var volunteerSchema = mongoose.Schema({
+  // Geo spatial properties
+  geo: {type: [Number], index: '2d'},
+
   // Contact Information
   firstName: {type: String, required: true},
   lastName: {type: String, required: true},
