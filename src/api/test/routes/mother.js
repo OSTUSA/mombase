@@ -1,13 +1,13 @@
 var request = require('supertest')
   , app = require('../../app.js')
   , mongoose = require('mongoose')
-  , Volunteer = require('../../../lib/documents/volunteer')
+  , Mother = require('../../../lib/documents/mother')
   , assert = require('assert');
 
 describe('POST /api/mothers', function() {
 
   before(function() {
-    Volunteer.collection.drop();
+    Mother.collection.drop();
   });
 
   it('should create mother', function(done) {
