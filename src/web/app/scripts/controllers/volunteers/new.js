@@ -1,9 +1,18 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('VolunteersNewCtrl', function ($scope, UsStates) {
+  .controller('VolunteersNewCtrl', function ($scope, UsStates, LanguageCodes, Volunteer) {
     $scope.states = UsStates;
-    console.log($scope.states);
+    $scope.langCodes = LanguageCodes;
+
+    $scope.volunteer = {}
+    $scope.volunteer.languages = [$scope.langCodes[0]];
+
+
+    $scope.save = function()
+    {
+
+    }
 
     $scope.isFormValid = function(){
         return $scope.newVolunteer.$valid;
@@ -19,4 +28,5 @@ angular.module('webApp')
         else
             return true;
     }
+
   });

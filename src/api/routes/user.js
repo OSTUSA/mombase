@@ -7,10 +7,10 @@ passport.use(new LocalStrategy(
     User.findOne({ email: username }, function(err, user) {
       if (err) { return done(err); }
       if (!user) {
-        return done(null, false, { message: 'Incorrect email.' });
+        return done(null, false);
       }
       if (!user.comparePassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
+        return done(null, false);
       }
       return done(null, user);
     });
@@ -30,13 +30,13 @@ passport.deserializeUser(function(id, done) {
 /**
  * Login route
  */
-exports.login = function(req, res){
+exports.login = function(req, res, next){
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
     if (!user) { return res.status(401).send(); }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
-      res.send(user);
+      return res.send(user);
     });
-  })(req, res, next);
+   })(req, res, next);
 };

@@ -43,24 +43,17 @@ describe('User', function(){
   });
 
   describe('#comparePassword()', function() {
-    it('should give positive isMatch if passwords match', function(done) {
+    it('should give positive isMatch if passwords match', function() {
       var user = User.findOne({email:'test@email.com'}, function(err, u) {
         if (err) throw err;
-        u.comparePassword('test', function(err, isMatch) {
-          if (err) throw err;
-          assert.ok(isMatch);
-          done();
-        });      
+        assert.ok(u.comparePassword('test'));
       });
     });
 
-    it('should throw err if passwords match', function(done) {
+    it('should throw err if passwords match', function() {
       var user = User.findOne({email:'test@email.com'}, function(err, u) {
         if (err) throw err;
-        u.comparePassword('wrong', function(err, isMatch) {
-          assert.ifError(err);
-          done();
-        });      
+        assert.ifError(u.comparePassword('wrong'));
       });
     });
   });

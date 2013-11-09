@@ -1,1 +1,102 @@
-<p>This is the volunteers/edit view.</p>
+<div class='page-header'>
+    <h1 class='page-title'>Edit Volunteer</h1>
+</div>
+<div class='page-body'>
+    <form name='editVolunteer' novalidate="" ng-submit='save()'>
+        <div class='form-group' ng-class='{"has-error": isFieldInvalid("firstName")}'>
+
+            <!-- Name -->
+            <div class='form-group row'>
+                <div class='col-md-6'>
+                    <label>First Name</label>
+                    <input type='text' name='firstName' ng-required='true' class='form-control' ng-model='volunteer.firstName'/>
+                </div>
+
+                <div class='col-md-6'>
+                    <label>Last Name</label>
+                    <input type='text' name='lastName' ng-required='true' class='form-control' ng-model='volunteer.lastName'/>
+                </div>
+            </div>
+
+            <div class='form-group row'>
+                <div class='col-md-6'>
+                    <label>Email</label>
+                    <input type='email' name='email' ng-required='true' class='form-control' ng-model='volunteer.email'/>
+                </div>
+                <div class='col-md-6'>
+                    <label>Cell Phone</label>
+                    <input type='text' name='cellPhone' ng-required='true' class='form-control' ng-model='volunteer.phone'/>
+                </div>
+            </div>
+
+
+            <!-- Contact -->
+            <fieldset class='margin-top-50'>
+                <legend>Address</legend>
+                <div class='form-group'>
+                    <label>Street</label>
+                    <input type='text' name='address' ng-required='true' class='form-control' ng-model='volunteer.address.line1'/>
+                </div>
+
+                <div class='form-group row margin-top-20'>
+                    <div class='col-md-6'>
+                        <label>City</label>
+                        <input type='text' name='city' ng-required='true' class='form-control' ng-model='volunteer.address.city'/>
+                    </div>
+                    <div class='col-md-4'>
+                        <label>State</label>
+                        <select ng-model='volunteer.address.state' ng-required='true' ng-options='st.name for st in states' class='form-control'>
+                            <option value=''>Select State</option>
+                        </select>
+                    </div>
+                    <div class='col-md-2'>
+                        <label>Zip</label>
+                        <input type='text' name='zip' ng-required='true' class='form-control' ng-model='volunteer.address.zip'/>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Additional Information -->
+            <fieldset class='margin-top-50'>
+                <legend>Additional Information</legend>
+
+                <div class='form-group'>
+                    <label class='checkbox'>
+                        <input type='checkbox' ng-model='user.isHomeLiason'/>
+                        Is Home Liason
+                    </label>
+                </div>
+
+                <div class='form-group'>
+                    <label>Skills</label>
+                    <textarea rows='5' ng-model='volunteer.skills' class='form-control'>
+
+                    </textarea>
+                    <span class='help-block'>A comma separated list of volunteer skills ex: Nurse, Pyschiatrist, CPR, Juggling</span>
+                </div>
+
+                <div class='form-group'>
+                    <label>Restrictions</label>
+                    <textarea rows='5' ng-model='volunteer.restrictions' class='form-control'>
+
+                    </textarea>
+                    <span class='help-block'>A comma separated list of restrictions ex: Allergies, Locations, etc...</span>
+                </div>
+
+                <div class='form-group'>
+                    <label>Languages Spoken</label>
+                    <select ng-model='volunteer.languages' multiple ng-options='lang.name for lang in langCodes' class='form-control'>
+
+                    </select>
+                </div>
+
+            </fieldset>
+        </div>
+
+
+        <div class='form-actions'>
+            <button class='btn btn-primary' ng-disabled='!isFormValid()'>Save Volunteer</button>
+            <a class='btn btn-link margin-left-5' href="#/volunteers">Cancel</a>
+        </div>
+    </form>
+</div>

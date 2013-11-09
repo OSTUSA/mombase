@@ -12,6 +12,7 @@ angular.module('webApp')
             }
         }
 
+
         $scope.users = [
             $mock(1, "administrator", "admin@momsbloom.org", true),
             $mock(2, "user", "admin@momsbloom.org", true),

@@ -15,7 +15,7 @@ userSchema.virtual('password_hash')
   })
   .set(function (password) {
     if (password) {
-      var salt = bcrypt.genSaltSync(10);
+      var salt = bcrypt.genSaltSync(SALT_WORK_FACTOR);
       this.hash = bcrypt.hashSync(password, salt);
     }
   });
@@ -31,11 +31,8 @@ userSchema.virtual('password')
     }
   });
 
-userSchema.methods.comparePassword = function(candidatePassword, cb) {
-    bcrypt.compare(candidatePassword, this.hash, function(err, isMatch) {
-        if (err) return cb(err);
-        cb(null, isMatch);
-    });
+userSchema.methods.comparePassword = function(candidatePassword) {
+    return bcrypt.compareSync(candidatePassword, this.hash);
 };
 
 module.exports = mongoose.model('User', userSchema);

@@ -2,53 +2,33 @@
 /**
  * Module dependencies.
  */
+var express = require('express')
+  , routes = require('./routes')
+  , user = require('./routes/user')
+  , http = require('http')
+  , mother = require('./routes/mother')
+  , volunteer = require('./routes/volunteer')
+  , config = require('./config/application')
+  , app = express();
 
-var express = require('express');
-var routes = require('./routes');
-var user = require('./routes/user');
-var volunteer = require('./routes/volunteer');
-var http = require('http');
-var path = require('path');
-var mongoose = require('mongoose');
-var User = require('../lib/documents/user');
-var mother = require('./routes/mother');
-var volunteer = require('./routes/volunteer');
+config.configure(app);
 
-mongoose.connect('mongodb://127.0.0.1:27017/momsbloom');
-
-var app = express();
-
-// all environments
-app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.bodyParser());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
-
-// development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
-}
-
+//application routes
 app.get('/', routes.index);
 app.post('/api/users/login', user.login);
 app.post('/api/volunteer/create', volunteer.create);
 
-app.get('/api/mother', mother.get);
-app.post('/api/mother', mother.create);
+app.get('/api/mothers', mother.get);
+app.post('/api/mothers', mother.create);
+app.del('/api/mothers', mother.del);
+app.post('/api/mothers/search', mother.search);
 
-app.get('/api/volunteer', volunteer.get);
-app.post('/api/volunteer', volunteer.create);
-app.del('/api/volunteer', volunteer.del);
-app.post('/api/volunteer/search', volunteer.search);
+app.get('/api/volunteers', volunteer.get);
+app.post('/api/volunteers', volunteer.create);
+app.del('/api/volunteers', volunteer.del);
+app.post('/api/volunteers/search', volunteer.search);
 
-exports.app = app;
+module.exports = app;
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
