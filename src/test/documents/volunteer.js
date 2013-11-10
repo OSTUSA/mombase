@@ -28,13 +28,6 @@ describe('Volunteer', function(){
 		});
 	});
 
-	describe('#within()', function(){
-		it('should return a volunteer without error', function(done){
-			
-			
-		});
-	});
-
   after(function(){
     mongoose.disconnect();
   });

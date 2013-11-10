@@ -65,14 +65,12 @@ exports.search = function(req, res) {
 };
 
 exports.within = function(req, res){
-	var kvps = req.query.split('&');
-	var args = {};
-	for(var k in kvps){args[k] = kvps.split('=')[1];}
+	var args = req.query;
 
 	Volunteer.find(
 		{ geo: { $nearSphere : {
 			$geometry: {
-				type: 'point',
+				type: 'Point',
 				coordinates: [args['lat'],args['lng']]
 			},
 			$maxDistance: args['radius']

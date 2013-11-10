@@ -27,6 +27,7 @@ app.get('/api/volunteers', volunteer.get);
 app.post('/api/volunteers', volunteer.create);
 app.del('/api/volunteers', volunteer.del);
 app.post('/api/volunteers/search', volunteer.search);
+app.get('/api/volunteers/within', volunteer.within);
 
 module.exports = app;
 

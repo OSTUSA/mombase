@@ -9,7 +9,8 @@
     "express": "3.4.4",
     "jade": "*",
     "passport":"0.1.17",
-    "passport-local":"0.1.6"
+    "passport-local":"0.1.6",
+    "mongoose": "latest"
   },
   "devDependencies": {
     "grunt-mocha-test":"latest",

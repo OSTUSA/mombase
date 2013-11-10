@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var volunteerSchema = mongoose.Schema({
   // Geo spatial properties
-  geo: {type: [Number], index: '2d'},
+  geo: [], 
 
   // Contact Information
   firstName: {type: String, required: true},
@@ -33,5 +33,5 @@ var volunteerSchema = mongoose.Schema({
 
   homeVisitLiason: Boolean
 });
-
+//volunteerSchema.index({ geo: '2dsphere' });
 module.exports = mongoose.model('Volunteer', volunteerSchema);
