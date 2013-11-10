@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 
 var motherSchema = mongoose.Schema({
+  // Geo spatial properties
+  geo: [], 
 
   // Contact Information
   firstName: {type: String, required: true},
@@ -110,5 +112,5 @@ var motherSchema = mongoose.Schema({
 
   commentsNotes: String
 });
-
+motherSchema.index({ geo: '2dsphere' });
 module.exports = mongoose.model('Mother', motherSchema);

@@ -5,7 +5,8 @@ var request = require('supertest')
   , assert = require('assert');
 
 describe('POST /api/volunteers', function() {
-
+	var testVol = {firstName:'test', lastName: 'test', email: 'test@email.com', geo:[13,37]};
+	
   before(function() {
     Volunteer.collection.drop();
   });
@@ -17,7 +18,7 @@ describe('POST /api/volunteers', function() {
     request(app)
       .post('/api/volunteers')
       .set('Accept', 'application/json')
-      .send({firstName:'test', lastName: 'test', email: 'test@email.com'})
+      .send(testVol)
       .expect(200)
       .end( function(err, res) {
       	if(err) return done(err);
@@ -32,7 +33,7 @@ describe('POST /api/volunteers', function() {
     request(app)
       .post('/api/volunteers')
       .set('Accept', 'application/json')
-      .send({firstName:'test', lastName: 'test', email: 'test@email.com'})
+      .send(testVol)
       .expect(500, done);
   });
 
@@ -78,6 +79,21 @@ describe('POST /api/volunteers', function() {
       });
     });
 
+	it('should find the inserted user via geo indices', function(done){
+	    request(app)
+		.get('/api/volunteers/within')
+		.set('Accept', 'application/json')
+		.send({'lat':'12', 'lng':'37', 'radius':'5'})
+		.expect(200)
+		.end( function(err, res) {
+			if(err) return done(err);
+			assert( res.body.length == 2 );
+			assert( res.body[0].firstName == 'test' );
+        		assert( res.body[1].firstName == 'test' );
+        		done();
+      		});
+	
+	});
   
   it('should delete a volunteer', function( done ) {
     request(app)

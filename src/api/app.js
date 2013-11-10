@@ -30,8 +30,12 @@ app.get('/api/volunteers', volunteer.get);
 app.post('/api/volunteers', volunteer.create);
 app.del('/api/volunteers', volunteer.del);
 app.post('/api/volunteers/search', volunteer.search);
+<<<<<<< HEAD
+app.get('/api/volunteers/within', volunteer.within);
+=======
 app.put('/api/volunteers', volunteer.update);
 
+>>>>>>> e378f01fa9d94b6970bd5f8190e576eec30c8e6f
 
 module.exports = app;
 

@@ -62,7 +62,25 @@ exports.search = function(req, res) {
 		if ( err ) return res.set( 500 ).send( );
 		res.send(result);
 	});
-}
+};
+
+exports.within = function(req, res){
+	var args = req.query;
+
+	Volunteer.find(
+		{ geo: { $nearSphere : {
+			$geometry: {
+				type: 'Point',
+				coordinates: [args['lat'],args['lng']]
+			},
+			$maxDistance: args['radius']
+		}}},
+		function(err, result){
+			if(err) throw err;
+			res.send(result);
+		}
+	); 
+};
 
 
 /**
