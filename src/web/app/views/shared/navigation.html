@@ -1,22 +1,27 @@
 <div class='container vertical-margin-20'>
-    <div class="navbar navbar-inverse navbar-static-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">MomsBloom</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li ng-repeat='item in menu' ng-class='{"active": isActive(item.url)}'>
-                        <a ng-href="#{{item.url}}">{{item.text}}</a>
-                    </li>
-                </ul>
-            </div>
+    <div ng-show="isLoggedIn" class="navbar navbar-inverse navbar-static-top" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">MomsBloom</a>
         </div>
+        <div class="">
+            <ul class="nav navbar-nav navbar-left">
+                <li ng-repeat='item in menu' ng-class='{"active": isActive(item.url)}'>
+                    <a ng-href="#{{item.url}}">{{item.text}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a ng-click="Logout()" confirm-click="Are you sure you want to log out?" class="pull-right clickable">Log Out</a>
+                </li>
+            </ul>
+        </div>      
     </div>
 </div>

@@ -81,3 +81,15 @@ exports.within = function(req, res){
 		}
 	); 
 };
+
+
+/**
+ * Update route
+ */
+exports.update = function(req, res){
+	var body = req.body;
+	volunteerService.update(body, function(err, result) {
+		if ( err ) { return res.send( 500, 'failure'); }
+		res.send(result);
+	});
+};

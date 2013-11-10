@@ -30,7 +30,7 @@ passport.deserializeUser(function(id, done) {
 /**
  * Login route
  */
-exports.login = function(req, res, next){
+exports.login = function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
     if (!user) { return res.status(401).send(); }
@@ -39,4 +39,11 @@ exports.login = function(req, res, next){
       return res.send(user);
     });
    })(req, res, next);
+};
+
+/**
+ * Create user
+ */
+exports.create = function(req,res) {
+
 };

@@ -1,2 +1,19 @@
 <p>This is the match view.</p>
 
+
+<div class='page-header'>
+    <h1 class='page-title'>Match</h1>
+    <p class='page-description'>
+        This where you match a mom with a volunteer
+    </p>
+</div>
+
+<div class='page-body'>
+    <form name='momMatch' novalidate="" ng-submit=''>
+        <div class='form-group' ng-class='{"has-error": isFieldInvalid("firstName")}'>
+
+            <label>{{ mom.firstName }} {{ mom.lasttName }} adflj</label>
+
+        </div>
+    </form>
+</div>

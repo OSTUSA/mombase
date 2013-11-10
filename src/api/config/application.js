@@ -1,6 +1,6 @@
 var mongo = require('./mongo')
   , session = require('./session')
-  , passport = require('passport')
+  , auth = require('../middleware/auth')
   , mongoose = require('mongoose')
   , express = require('express');
 
@@ -22,9 +22,14 @@ module.exports = {
     app.use(express.cookieParser());
     app.use(express.session(session));
 
-    //passport
-    app.use(passport.initialize());
-    app.use(passport.session());
+    //authentication
+    if (app.get('env') != 'development') {
+      app.use(auth.checkAuth());
+    }
+    app.use(auth.initialize);
+    app.use(auth.session);
+
+    //add router
     app.use(app.router);
 
     // development only

@@ -18,12 +18,20 @@
         </thead>
         <tbody>
         <tr ng-repeat='mom in moms'>
-            <td>{{mom.name}}</td>
+            <td>
+                {{mom.firstName}} {{mom.lastName}}
+            </td>
             <td>{{mom.age}} years old</td>
-            <td>{{mom.address}}</td>
+            <td>
+                {{mom.address.line1}}
+            </td>
             <td>
                 <a class='btn'>
                     Edit
+                </a>
+
+                <a class='btn' ng-href="#/match/{{mom._id}}">
+                    Match
                 </a>
             </td>
         </tr>

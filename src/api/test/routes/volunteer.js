@@ -11,6 +11,9 @@ describe('POST /api/volunteers', function() {
     Volunteer.collection.drop();
   });
 
+  var createdUser;
+  var searchUserId;
+
   it('should create volunteer', function(done) {
     request(app)
       .post('/api/volunteers')
@@ -19,6 +22,7 @@ describe('POST /api/volunteers', function() {
       .expect(200)
       .end( function(err, res) {
       	if(err) return done(err);
+        createdUser = res.res.body;
       	assert.ok(res.res.body.firstName);
       	assert.ok(res.res.body.lastName);      	
       	done();
@@ -41,6 +45,7 @@ describe('POST /api/volunteers', function() {
       .expect(200)
       .end( function(err, res) {
         if(err) return done(err);
+        searchUserId = res.res.body._id;
         assert.ok(res.res.body.firstName);
         assert.ok(res.res.body.lastName);
         request(app)
@@ -89,4 +94,32 @@ describe('POST /api/volunteers', function() {
       		});
 	
 	});
+  
+  it('should delete a volunteer', function( done ) {
+    request(app)
+      .del('/api/volunteers')
+      .set('Accept', 'application/json')
+      .send({'id':searchUserId})
+      .expect(200)
+      .end( function(err, res) {
+        if(err) return done(err);
+        done();
+      });
+  });
+
+
+  it('should update a volunteer', function( done ) {
+    createdUser.firstName = 'tested';
+    request(app)
+      .put('/api/volunteers')
+      .set('Accept', 'application/json')
+      .send(createdUser)
+      .expect(200)
+      .end( function(err, res) {
+        if(err) return done(err);
+        done();
+      });
+  });
+
+
 });

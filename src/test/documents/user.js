@@ -25,6 +25,14 @@ describe('User', function(){
       });
     });
 
+    it('should throw error if duplicate email is added', function(done) {
+      var user = new User({first:'Brian', last:'Scaturro', email:'test@email.com', password:'mypass'});
+      user.save(function(err, u) {
+        assert(err);
+        done();
+      });
+    });
+
     it('should save a hashed password', function(done) {
       var user = User.findOne({email:'brian@email.com'}, function(err, u) {
         if (err) throw err;

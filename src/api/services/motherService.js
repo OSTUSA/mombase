@@ -26,6 +26,14 @@ MotherService.prototype = {
       }
     });
   },
+  update: function( body, cb) {
+    var id = body._id;
+    delete body._id;
+    var self = this;
+    Mother.update({_id: id}, body, {upsert: true}, function( err ) {
+      self.get(id, cb);
+    });
+  },
   get: function( id, cb ) {
     Mother.findOne( { _id: id }, cb );
   },

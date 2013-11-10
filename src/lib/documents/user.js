@@ -36,3 +36,13 @@ userSchema.methods.comparePassword = function(candidatePassword) {
 };
 
 module.exports = mongoose.model('User', userSchema);
+
+userSchema.pre("save", function(next) {
+  if (! this.isNew) return next();
+
+  this.model("User").findOne({email: this.email}, function(err, user) {
+    if (err) return next(err);
+    if (user) return next(new Error("email must be unique"));
+    return next();
+  });
+});

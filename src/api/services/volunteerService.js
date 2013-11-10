@@ -24,6 +24,14 @@ VolunteerService.prototype = {
 			}
 		});
 	},
+	update: function( body, cb) {
+		var id = body._id;
+		delete body._id;
+		var self = this;
+		Volunteer.update({_id: id}, body, {upsert: true}, function( err ) {
+			self.get(id, cb);
+		});
+	},
 	get: function( id, cb ) {
 		Volunteer.findOne( { _id: id }, cb );
 	},
