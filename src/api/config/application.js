@@ -8,7 +8,6 @@ module.exports = {
   configure: function(app) {
     //connect to mongodb
     mongoose.connect('mongodb://' + mongo.host + ':' + mongo.port + '/' + mongo.db);
-
     //configure application middleware
     app.set('port', process.env.PORT || 3000);
     app.use(express.favicon());

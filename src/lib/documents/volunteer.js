@@ -14,13 +14,13 @@ var volunteerSchema = mongoose.Schema({
     city : { type: String },
     state : { type: String }
   },
+  loc: { type : [Number], index: '2dsphere' },
   // Volunteer Skills ex: Nurse, Pyschiatrist, CPR, Juggling
   skills: [String],
   // Allergies (May be HIPPA concerns with this, could be removed)
   restrictions: [String],
   // Based on ISO-639-2  ( http://www.loc.gov/standards/iso639-2/php/code_list.php )
   languages: [String],
-
   availability: [{
     day: { type: Number, required: true},
     // Time in seconds into the day (from midnight)
@@ -31,4 +31,22 @@ var volunteerSchema = mongoose.Schema({
   homeVisitLiason: Boolean
 });
 
-module.exports = mongoose.model('Volunteer', volunteerSchema);
+var volunteer = mongoose.model('Volunteer', volunteerSchema);
+
+volunteer.setup = function() {
+  mongoose.connection.db.collection('volunteers', function(err,coll) {
+    if(!coll) {
+      mongoose.connection.db.createCollection('volunteers', function(err,coll) {
+        coll.ensureIndex({loc:'2dsphere'}, function(err, res){
+          done();
+        });
+      });
+    } else {
+      coll.ensureIndex({loc:'2dsphere'}, function(err, res){
+        done();
+      });
+    }
+  });
+}
+
+module.exports = volunteer;

@@ -8,6 +8,11 @@ describe('POST /api/volunteers', function() {
 
   before(function() {
     Volunteer.collection.drop();
+    // Volunteer.db.db.createCollection('volunteers', function(err, coll) {
+    //   coll.ensureIndex({loc:'2dsphere'}, function(err, res){
+    //     done();
+    //   });
+    // });
   });
 
   var createdUser;
@@ -17,7 +22,7 @@ describe('POST /api/volunteers', function() {
     request(app)
       .post('/api/volunteers')
       .set('Accept', 'application/json')
-      .send({firstName:'test', lastName: 'test', email: 'test@email.com'})
+      .send({firstName:'test', lastName: 'test', email: 'test@email.com', loc: [-20.0, 5.0] })
       .expect(200)
       .end( function(err, res) {
       	if(err) return done(err);
