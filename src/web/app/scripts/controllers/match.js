@@ -17,7 +17,7 @@ angular.module('webApp')
       Volunteer.within({
         lon: $scope.mom.loc[1],
         lat: $scope.mom.loc[0],
-        radius: range
+        radius: range / 3959.0
       }, function(data){
         $scope.volunteers = data;
       });

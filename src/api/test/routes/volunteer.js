@@ -139,7 +139,7 @@ describe('POST /api/volunteers', function() {
         if(err) return done(err);
 
        request(app)
-         .get('/api/volunteers/within?lat=-20&lon=5&radius=5')
+         .get('/api/volunteers/within?lat=-20&lon=5&radius=' + ( 1.0 / 3959.0))
          .set('Accept', 'application/json')
          .expect(200)
          .end( function(err, res) {
@@ -156,7 +156,7 @@ describe('POST /api/volunteers', function() {
 
  it('should not find a volunteer outside of it', function( done ) {
    request(app)
-     .get('/api/volunteers/within?lon=50&lat=50&radius=1')
+     .get('/api/volunteers/within?lon=50&lat=50&radius=' + ( 5.0 / 3959.0))
      .set('Accept', 'application/json')
      .expect(200)
      .end( function(err, res) {

@@ -42,12 +42,13 @@ angular.module('webApp')
 			success: function(data, status){
 				var json = data, coord;
 				if(json){
-					var res = json.results;
+					var jsonObj = JSON.parse(json);
+					var res = jsonObj.results;
 
 					// check the status, be sure we have results
-					if(json.status != 'OK' || !res.length){
+					if(jsonObj.status != 'OK' || !res.length){
 						ErrorHandler.Log(service,
-							'Google geoloc API status=' + json.status +
+							'Google geoloc API status=' + jsonObj.status +
 							', Results = ' + res
 						);
 						defer.resolve(null);
