@@ -14,6 +14,7 @@
             <th>Name</th>
             <th>Email</th>
             <th>Address</th>
+            <th>Availability</th>
             <th></th>
         </tr>
         </thead>
@@ -28,6 +29,7 @@
             <td>
                 {{address()}}
             </td>
+            <td>{{volunteer.availability}}</td>
             <td class='text-right'>
                 <a class='btn' ng-click="store()" ng-href='#/volunteers/edit/{{volunteer._id}}'>
                     Edit

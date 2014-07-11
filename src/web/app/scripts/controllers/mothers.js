@@ -1,5 +1,16 @@
 'use strict';
 
+function to_date(o) {
+    var parts = o.baby.dueDate.split('-');
+    var day = parseInt(parts[2].split('T')[0], 10);
+    o.dueDate = new Date(parseInt(parts[0], 10), parseInt(parts[1] - 1, 10), day);
+    return o;
+}
+
+function asc_start_time(o) {
+    return o.dueDate.getTime();
+}
+
 angular.module('webApp')
 
   .controller('MothersCtrl', ["$scope", "$injector", "Mother", "Alerts", "ngTableParams", "$filter", "$activity", function ($scope, $injector, Mother, Alerts, ngTableParams, $filter, $activity) {
@@ -63,6 +74,26 @@ angular.module('webApp')
 
       return AddressHelper.formatAddress($scope.mother.address);
     };
+
+    $scope.dueDate = function () {
+      var value = _.chain($scope.mother.children)
+         .filter(function(child) {
+           return !_.has(child, 'birthDate') && _.isString(child.baby.dueDate);
+         })
+         .map(to_date)
+         .sortBy(asc_start_time)
+         .value();
+
+      if (_.isArray(value) && value.length > 0) {
+         return value[0].dueDate;
+      } else {
+        return undefined;
+      }
+    };
+
+    $scope.hvlVisited = $scope.mother.communication &&
+        $scope.mother.communication.requestForServices &&
+        !!$scope.mother.communication.requestForServices.response;
 
     $scope.delete = function() {
       Mother.delete({id:$scope.mother._id},

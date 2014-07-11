@@ -158,8 +158,15 @@
 
             <div class='form-group row'>
                 <div class='col-md-12'>
+                    <label>Referred By</label>
+                    <input type='text' name='referredBy' class='form-control' ng-model='mother.referredBy'/>
+                </div>
+            </div>
+
+            <div class='form-group row'>
+                <div class='col-md-12'>
                     <label>Availability</label>
-                    <select ng-model='selectedAvailability' ng-required='true' ng-options='av.name for av in availabilityCodes' class='form-control'>
+                    <select name='selectedAvailability' ng-model='selectedAvailability' required ng-options='av.name for av in availabilityCodes' class='form-control'>
                         <option value=''>Select Availability</option>
                     </select>
                 </div>
@@ -179,12 +186,12 @@
 
             <div class='form-group row'>
                 <div class='col-md-6'>
-                    <label>Waiver Sent</label>
+                    <label>HVL Contacted</label>
                     <input type='date' name='waiverSent' class='form-control' ng-model='mother.communication.waiver.sent'/>
                 </div>
 
                 <div class='col-md-6'>
-                    <label>Waiver Response</label>
+                    <label>Waiver Received</label>
                     <input type='date' name='waiverResponse' class='form-control' ng-model='mother.communication.waiver.response'/>
                 </div>
             </div>
@@ -196,6 +203,22 @@
             <legend>Additional Information</legend>
 
             <div class='form-group'>
+                <label>Comments</label>
+                <textarea rows='5' ng-model='mother.commentsNotes' class='form-control'>
+                </textarea>
+            </div>
+
+            <div class='form-group'>
+                <label>Smoking</label>
+                <input type="text" ng-model='mother.smoking' class='form-control' />
+            </div>
+
+            <div class='form-group'>
+                <label>Pets</label>
+                <input type="text" ng-model='mother.pets' class='form-control' />
+            </div>
+
+<!--             <div class='form-group'>
                 <label>Allergy Medications</label>
                 <textarea rows='5' ng-model='mother.restrictions.medical' class='form-control'>
 
@@ -216,11 +239,11 @@
 
                 </textarea>
                 <span class='help-block'>A comma separated list of pet allergies</span>
-            </div>
+            </div> -->
 
             <div class='form-group'>
                 <label>Languages Spoken</label>
-                
+
                 <select ng-model='mother.languages' multiple ng-options='lang.abbr as lang.name for lang in langCodes' class='form-control'>
 
                 </select>

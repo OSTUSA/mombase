@@ -5,7 +5,9 @@ angular.module('webApp')
         return {
             format: function(dateStr, format)
             {
-                return $filter('date')(dateStr, format || 'yyyy-MM-dd');
+                var date = new Date(dateStr.toString());
+                var utcDate = $filter('utc')(date);
+                return $filter('date')(utcDate, 'yyyy-MM-dd');
             },
             getAge: function(dateStr)
             {
@@ -65,8 +67,8 @@ angular.module('webApp')
                 return address &&
                     (address.zip ||
                         (address.city && address.state) ||
-                        (address.city && address.line1))            
-            }, 
+                        (address.city && address.line1))
+            },
             formatAddress: function(address)
             {
                 if(!address) return '';

@@ -15,18 +15,25 @@ var volunteerSchema = mongoose.Schema({
     state : { type: String }
   },
   loc: { type : [Number], index: '2d' },
+  // Availability of the volunteer ex: 'Nights and weekends'
+  availability: String,
+  // The drive time for the volunteer
+  driveTime: String,
   // Volunteer Skills ex: Nurse, Pyschiatrist, CPR, Juggling
   skills: [String],
+  // Short bio about the volunteer
+  bio: String,
   // Allergies (May be HIPPA concerns with this, could be removed)
   restrictions: [String],
   // Based on ISO-639-2  ( http://www.loc.gov/standards/iso639-2/php/code_list.php )
   languages: [String],
-  availability: [{
-    day: { type: Number },
-    // Time in seconds into the day (from midnight)
-    start: { type: Number },
-    end: Number
-  }],
+  // We've decided to just use a simple string instead
+  // availability: [{
+  //   day: { type: Number },
+  //   // Time in seconds into the day (from midnight)
+  //   start: { type: Number },
+  //   end: Number
+  // }],
 
   homeVisitLiason: Boolean
 });

@@ -1,6 +1,5 @@
 <div class='page-header'>
     <h1 class='page-title'>Edit Mother</h1>
-    <p class='page-description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consequat semper purus vitae facilisis. Sed faucibus lectus id dui vehicula, id condimentum ipsum aliquam.</p>
 </div>
 <div class='page-body'>
     <div class='row margin-bottom-50'>
@@ -164,8 +163,15 @@
 
             <div class='form-group row'>
                 <div class='col-md-12'>
+                    <label>Referred By</label>
+                    <input type='text' name='referredBy' class='form-control' ng-model='mother.referredBy'/>
+                </div>
+            </div>
+
+            <div class='form-group row'>
+                <div class='col-md-12'>
                     <label>Availability</label>
-                    <select ng-model='selectedAvailability'  ng-options='av.name for av in availabilityCodes' class='form-control'>
+                    <select ng-model='selectedAvailability' required ng-options='av.name for av in availabilityCodes' class='form-control'>
                         <option value=''>Select Availability</option>
                     </select>
                 </div>
@@ -185,12 +191,12 @@
 
             <div class='form-group row'>
                 <div class='col-md-6'>
-                    <label>Waiver Sent</label>
+                    <label>HVL Contacted</label>
                     <input type='date' name='waiverSent' class='form-control' ng-model='mother.communication.waiver.sent'/>
                 </div>
 
                 <div class='col-md-6'>
-                    <label>Waiver Response</label>
+                    <label>Waiver Received</label>
                     <input type='date' name='waiverResponse' class='form-control' ng-model='mother.communication.waiver.response'/>
                 </div>
             </div>
@@ -202,11 +208,19 @@
             <legend>Additional Information</legend>
 
             <div class='form-group'>
-                <label>Restrictions</label>
-                <textarea rows='5' ng-model='restrictionList' comma-separated='mother.restrictions' class='form-control'>
-
+                <label>Comments</label>
+                <textarea rows='5' ng-model='mother.commentsNotes' class='form-control'>
                 </textarea>
-                <span class='help-block'>A comma separated list of restrictions</span>
+            </div>
+
+            <div class='form-group'>
+                <label>Smoking</label>
+                <input type="text" ng-model='mother.smoking' class='form-control' />
+            </div>
+
+            <div class='form-group'>
+                <label>Pets</label>
+                <input type="text" ng-model='mother.pets' class='form-control' />
             </div>
 
             <div class='form-group'>
@@ -227,200 +241,6 @@
 
             </div>
         </fieldset>
-
-
-        <!--
-
-            <fieldset class='margin-top-50'>
-                <legend>Service Dates</legend>
-
-                <div class='form-group row'>
-                    <div class='col-md-6'>
-                        <label>Started </label>
-                        <input type='text' name='serviceStart' class='form-control' ng-model='mother.serviceStartedDate'/>
-                    </div>
-
-                    <div class='col-md-6'>
-                        <label>Ended</label>
-                        <input type='text' name='serviceEnd' class='form-control' ng-model='mother.serviceEndedDate'/>
-                    </div>
-                </div>
-            </fieldset>
-
-
-            <fieldset class="margin-top-50">
-                <legend>Communication</legend>
-
-                <div class='form-group row'>
-                    <div class='col-md-12'>
-                        <label>Availability</label>
-                        <select ng-model='selectedAvailability'  ng-options='av.name for av in availabilityCodes' class='form-control'>
-                            <option value=''>Select Availability</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class='form-group row'>
-                    <div class='col-md-6'>
-                        <label>Request for Services Date</label>
-                        <input type='date' name='requestForServices' class='form-control' ng-model='mother.communication.requestForServices.sent'/>
-                    </div>
-
-                    <div class='col-md-6'>
-                        <label>Response for Services Date</label>
-                        <input type='date' name='responseForServices' class='form-control' ng-model='mother.communication.requestForServices.response'/>
-                    </div>
-                </div>
-
-                <div class='form-group row'>
-                    <div class='col-md-6'>
-                        <label>Waiver Sent</label>
-                        <input type='date' name='waiverSent' class='form-control' ng-model='mother.communication.waiver.sent'/>
-                    </div>
-
-                    <div class='col-md-6'>
-                        <label>Waiver Response</label>
-                        <input type='date' name='waiverResponse' class='form-control' ng-model='mother.communication.waiver.response'/>
-                    </div>
-                </div>
-
-            </fieldset>
-
-
-            <fieldset class='margin-top-50'>
-                <legend>Communications</legend>
-
-
-                <div class='form-group row'>
-                    <div class='col-md-2'>
-                        <label>Availability</label>
-                        <select ng-model='selectedAvailability'  ng-options='av.value as av.name for av in availabilityCodes' class='form-control'>
-                            <option value=''>Select Availability</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class='form-group'>
-                    <label>How did you find us?</label>
-                    <textarea rows='5' ng-model='mother.howDidYouFind' class='form-control'>
-
-                    </textarea>
-                </div>
-
-                <div class='form-group'>
-                    <label>Referral Details</label>
-                    <textarea rows='5' ng-model='mother.referralDetails' class='form-control'>
-
-                    </textarea>
-                </div>
-            </fieldset>
-
-
-
-            <fieldset class='margin-top-50'>
-                <legend>Additional Information</legend>
-                <div class='form-group'>
-                    <label>Restrictions</label>
-                    <textarea rows='5' comma-seperated='mother.restrictions' ng-model='restrictionList' class='form-control'>
-
-                    </textarea>
-                    <span class='help-block'>A comma separated list of restrictions ex: Allergies, Locations, etc...</span>
-                </div>
-
-                <div class='form-group'>
-                    <label>Languages Spoken</label>
-
-                    <select ng-model='mother.languages' multiple ng-options='lang.abbr as lang.name for lang in langCodes' class='form-control'>
-
-                    </select>
-                    <div class='vertical-margin-5'>
-                        <span class='label label-default margin-right-5' ng-repeat='lang in mother.languages'>{{getLanguageName(lang)}}&nbsp;</span>
-                    </div>
-                </div>
-
-                <div class='form-group row'>
-                    <div class='col-md-6'>
-                        <label>Pediatrician</label>
-                        <input type='text' name='pediatrician' class='form-control' ng-model='mother.pediatrician'/>
-                    </div>
-
-                    <div class='col-md-6'>
-                        <label>Ethnicity</label>
-                        <input type='text' name='ethnicity' class='form-control' ng-model='mother.ethnicity'/>
-                    </div>
-                </div>
-            </fieldset>
-        -->
-        <!-- Children -->
-        <!--<fieldset class='margin-top-50'>-->
-            <!--<legend>Children</legend>-->
-
-            <!--<div class='form-group'>-->
-                <!--<table class="table">-->
-                    <!--<thead>-->
-                    <!--<tr>-->
-                        <!--<th>Name</th>-->
-                        <!--<th>Gender</th>-->
-                        <!--<th>Age</th>-->
-                        <!--<th>Receiving Services</th>-->
-                    <!--</tr>-->
-                    <!--</thead>-->
-                    <!--<tbody>-->
-                    <!--<tr ng-repeat="child in mother.children">-->
-                        <!--<td>{{ child.firstName }} {{ child.lastName }}</td>-->
-                        <!--<td>{{ child.gender }}</td>-->
-                        <!--<td>{{ child.age }}</td>-->
-                        <!--<td>-->
-                            <!--<input type="checkbox" ng-model="child.receivingServices" />-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                    <!--</tbody>-->
-                <!--</table>-->
-            <!--</div>-->
-
-        <!--</fieldset>-->
-
-            <!-- Volunteers (Move) -->
-
-            <!--<fieldset>-->
-                <!--<legend>Volunteers</legend>-->
-                <!--<div class='form-group row'>-->
-                    <!--<div class='col-md-6'>-->
-                        <!--<label>Primary Volunteer</label>-->
-                        <!--<input name='primaryVolunteer' class='form-control' ng-model='mother.primaryVolunteer'/>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</fieldset>-->
-
-            <!-- Visits (Move to separate area) -->
-            <!--<fieldset class='margin-top-50'>-->
-                <!--<legend>Visits</legend>-->
-
-                <!--<div class='form-group'>-->
-                    <!--<table class="table">-->
-                        <!--<thead>-->
-                        <!--<tr>-->
-                            <!--<th>Date</th>-->
-                            <!--<th>Primary Volunteer</th>-->
-                            <!--<th>Notes</th>-->
-                        <!--</tr>-->
-                        <!--</thead>-->
-                        <!--<tbody>-->
-                        <!--<tr ng-repeat="visit in mother.visits">-->
-                            <!--<td>{{ visit.startDate }}</td>-->
-                            <!--<td>{{ child.volunteers[0] }}</td>-->
-                            <!--<td>{{  }}</td>-->
-                        <!--</tr>-->
-                        <!--</tbody>-->
-                    <!--</table>-->
-                <!--</div>-->
-
-            <!--</fieldset>-->
-
-        </div>
-
-
-
 
         <div class='form-actions'>
             <button class='btn btn-primary' ng-disabled='!isFormValid()'>Save Mother</button>

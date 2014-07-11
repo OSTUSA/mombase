@@ -11,20 +11,21 @@
     <table ng-table="tableParams" class="table table-striped">
         <tr ng-repeat="mother in $data" ng-controller="MotherRowCtrl">
             <td data-title="'Name'" sortable="'firstName'">
-                {{mother.firstName}} {{mother.lastName}}
-                <span class="text-muted" ng-show="mother.nickName">({{mother.nickName}})</span>
+              <a class='btn' ng-click="store()" ng-href="#/mothers/edit/{{mother._id}}">
+                  {{mother.firstName}} {{mother.lastName}}
+                  <span class="text-muted" ng-show="mother.nickName">({{mother.nickName}})</span>
+              </a
             </td>
-            <td data-title="'Email'" sortable="'email'">
-                {{mother.email}}
-            </td>
+            <td data-title="'Request Date'">{{mother.communication.requestForServices.sent | date}}</td>
+            <td data-title="'Due Date'">{{dueDate() | date}}</td>
             <td data-title="'Phone'" sortable="'phone'">{{mother.phone | phone}}</td>
-            <td data-title="'Address'">
-                {{mother.address | address}}
+            <td data-title="'HVL'">
+              <input type='checkbox' disabled ng-model="hvlVisited" />
+            </td>
+            <td data-title="'Zipcode'">
+                <span title='{{mother.address | address}}'>{{mother.address.zip}}</span>
             </td>
             <td class='text-right'>
-                <a class='btn' ng-click="store()" ng-href="#/mothers/edit/{{mother._id}}">
-                    Edit
-                </a>
                 <a class='btn text-danger' confirm-click='Are you sure you want to delete this mother?' ng-click='delete()'>
                     Delete
                 </a>

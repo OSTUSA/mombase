@@ -19,6 +19,9 @@ angular.module('webApp')
                 if(child.birthDate)
                     child.birthDate = $scope.helpers.date.format(child.birthDate);
 
+                if(child.baby && child.baby.dueDate)
+                    child.baby.dueDate = $scope.helpers.date.format(child.baby.dueDate);
+
                 $scope.currentChild = child;
             },
             function(){

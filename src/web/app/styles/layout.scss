@@ -59,6 +59,11 @@ body {
   line-height: $line-height-computed;
 }
 
+.navbar-header a.navbar-brand
+{
+  padding: 10px 15px 0 15px;
+}
+
 // Navigation Action
 // ---------------------------
 .inline-action {
